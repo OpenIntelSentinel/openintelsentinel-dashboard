@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenIntel Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">OpenIntel Dashboard</div>
+        <button class="button" onclick="fetchData()">Refresh Data</button>
+        <div id="data-output"></div>
+    </div>
+
+    <script>
+        function fetchData() {
+            document.getElementById("data-output").innerHTML = 
+"Loading...";
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("data-output").innerHTML = 
+"<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+                })
+                .catch(error => {
+                    document.getElementById("data-output").innerHTML = 
+"Error loading data.";
+                });
+        }
+    </script>
+</body>
+</html>
+
